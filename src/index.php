@@ -15,8 +15,8 @@
     <body>
         <div class="container">
             <div class="hero-unit">
-                <h1>Test My App</h1>
-                <h2>Congratulations</h2>
+                <h1>Perl Docker Project and Test Frontend</h1>
+                <h2>Congratulations!!</h2>
                 <p>Your application is now running on a container in Amazon ECS.</p>
                 <p>The container is running App version 0.1.</p>
                 <?php

@@ -67,17 +67,9 @@ RUN echo "if \$syslogfacility-text == 'local6' and \$programname == 'httpd' then
 	echo "if \$syslogfacility-text == 'local6' and \$programname == 'httpd' then ~" >> /etc/rsyslog.d/httpd.conf && \
 	echo "if \$syslogfacility-text == 'local7' and \$programname == 'httpd' then /var/log/httpd-error.log" >> /etc/rsyslog.d/httpd.conf && \
 	echo "if \$syslogfacility-text == 'local7' and \$programname == 'httpd' then ~" >> /etc/rsyslog.d/httpd.conf
-RUN echo "deb http://ppa.launchpad.net/pypy/ppa/ubuntu trusty main" > \
-    /etc/apt/sources.list.d/pypy-ppa.list
-
-RUN apt-key adv --keyserver keyserver.ubuntu.com \
-                --recv-keys 2862D0785AFACD8C65B23DB0251104D968854915
-RUN apt-get update
-RUN apt-get install -qyy \
-    -o APT::Install-Recommends=false -o APT::Install-Suggests=false \
-    python-virtualenv pypy libffi6 openssl
-RUN virtualenv -p /usr/bin/pypy /appenv
-RUN . /appenv/bin/activate; pip install pip==6.0.8
+RUN apt-get update && apt-get install -y python python-dev python3.5 python3.5-dev python-pip virtualenv libssl-dev libpq-dev git build-essential libfontconfig1 libfontconfig1-dev
+RUN pip install setuptools pip --upgrade --force-reinstall
+RUN virtualenv /venv/testenv/ -p which python3.5
 COPY awslogs.conf awslogs.conf
 RUN python ./awslogs-agent-setup.py -n -r us-east-1 -c /awslogs.conf
 

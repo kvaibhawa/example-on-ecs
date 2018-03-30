@@ -67,9 +67,12 @@ RUN echo "if \$syslogfacility-text == 'local6' and \$programname == 'httpd' then
 	echo "if \$syslogfacility-text == 'local6' and \$programname == 'httpd' then ~" >> /etc/rsyslog.d/httpd.conf && \
 	echo "if \$syslogfacility-text == 'local7' and \$programname == 'httpd' then /var/log/httpd-error.log" >> /etc/rsyslog.d/httpd.conf && \
 	echo "if \$syslogfacility-text == 'local7' and \$programname == 'httpd' then ~" >> /etc/rsyslog.d/httpd.conf
-
+RUN apt-get install -qyy \
+    -o APT::Install-Recommends=false -o APT::Install-Suggests=false \
+    python-virtualenv pypy libffi6 openssl
+RUN virtualenv -p /usr/bin/pypy /appenv
+RUN . /appenv/bin/activate; pip install pip==6.0.8
 COPY awslogs.conf awslogs.conf
-RUN python -m virtualenv venv
 RUN python ./awslogs-agent-setup.py -n -r us-east-1 -c /awslogs.conf
 
 RUN pip install supervisor

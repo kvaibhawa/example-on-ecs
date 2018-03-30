@@ -44,11 +44,16 @@ RUN apt-get -q update && \
   RUN apt-get install -y openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config
 
   # install RVM, Ruby, and Bundler
-  RUN \curl -L https://get.rvm.io | bash -s stable
-  RUN /bin/bash -l -c "rvm requirements"
-  RUN /bin/bash -l -c "rvm install 2.0"
-  RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
-  
+  #RUN \curl -L https://get.rvm.io | bash -s stable
+  #RUN /bin/bash -l -c "rvm requirements"
+  #RUN /bin/bash -l -c "rvm install 2.0"
+  #RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
+  RUN apt-get update -q && \
+    apt-get install -qy curl ca-certificates gnupg2 build-essential --no-install-recommends && apt-get clean
+  RUN gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+  RUN curl -sSL https://get.rvm.io | bash -s
+  RUN /bin/bash -l -c ". /etc/profile.d/rvm.sh && rvm install 2.3.3"
+
 RUN curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -o awslogs-agent-setup.py
 
 RUN sed -i "s/#\$ModLoad imudp/\$ModLoad imudp/" /etc/rsyslog.conf && \

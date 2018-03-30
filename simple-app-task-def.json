@@ -12,7 +12,7 @@
         {
             "environment": [],
             "name": "simple-app",
-            "image": "431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1m65fbu557cyq:68976497",
+            "image": "amazon/amazon-ecs-sample",
             "cpu": 10,
             "memory": 500,
             "portMappings": [

@@ -35,8 +35,20 @@ CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
 
 
 #For Log Management
-RUN apt-get -y -q install rsyslog python-setuptools python-pip curl
+RUN apt-get -q update && \
+  apt-get -y -q dist-upgrade && \
+  apt-get -y -q install rsyslog python-setuptools python-pip curl
+  RUN apt-get install -y nginx openssh-server git-core openssh-client curl
+  RUN apt-get install -y nano
+  RUN apt-get install -y build-essential
+  RUN apt-get install -y openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion pkg-config
 
+  # install RVM, Ruby, and Bundler
+  RUN \curl -L https://get.rvm.io | bash -s stable
+  RUN /bin/bash -l -c "rvm requirements"
+  RUN /bin/bash -l -c "rvm install 2.0"
+  RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
+  
 RUN curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -o awslogs-agent-setup.py
 
 RUN sed -i "s/#\$ModLoad imudp/\$ModLoad imudp/" /etc/rsyslog.conf && \

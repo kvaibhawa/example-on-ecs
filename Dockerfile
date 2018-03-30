@@ -67,9 +67,7 @@ RUN echo "if \$syslogfacility-text == 'local6' and \$programname == 'httpd' then
 	echo "if \$syslogfacility-text == 'local6' and \$programname == 'httpd' then ~" >> /etc/rsyslog.d/httpd.conf && \
 	echo "if \$syslogfacility-text == 'local7' and \$programname == 'httpd' then /var/log/httpd-error.log" >> /etc/rsyslog.d/httpd.conf && \
 	echo "if \$syslogfacility-text == 'local7' and \$programname == 'httpd' then ~" >> /etc/rsyslog.d/httpd.conf
-RUN apt-get update && apt-get install -y python python-dev python3.5 python3.5-dev python-pip virtualenv libssl-dev libpq-dev git build-essential libfontconfig1 libfontconfig1-dev
-RUN pip install setuptools pip --upgrade --force-reinstall
-RUN virtualenv /venv/testenv/ -p which python3.5
+
 COPY awslogs.conf awslogs.conf
 RUN python ./awslogs-agent-setup.py -n -r us-east-1 -c /awslogs.conf
 

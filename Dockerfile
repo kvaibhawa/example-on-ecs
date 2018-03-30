@@ -67,14 +67,23 @@ RUN echo "if \$syslogfacility-text == 'local6' and \$programname == 'httpd' then
 	echo "if \$syslogfacility-text == 'local6' and \$programname == 'httpd' then ~" >> /etc/rsyslog.d/httpd.conf && \
 	echo "if \$syslogfacility-text == 'local7' and \$programname == 'httpd' then /var/log/httpd-error.log" >> /etc/rsyslog.d/httpd.conf && \
 	echo "if \$syslogfacility-text == 'local7' and \$programname == 'httpd' then ~" >> /etc/rsyslog.d/httpd.conf
+RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
+RUN /usr/local/bin/pip2.7 install virtualenv
 
 COPY awslogs.conf awslogs.conf
 #RUN python ./awslogs-agent-setup.py -n -r us-east-1 -c /awslogs.conf --python=/usr/bin/python2.7
 RUN chmod +x ./awslogs-agent-setup.py
-RUN ./awslogs-agent-setup.py --non-interactive --region ${AWS_REGION} --configfile ./awslogs.conf
+RUN python ./awslogs-agent-setup.py --non-interactive --region us-east-1 --configfile ./awslogs.conf
 
-RUN pip install supervisor
+RUN /usr/local/bin/pip2.7 install supervisor
 COPY supervisord.conf /usr/local/etc/supervisord.conf
 
 EXPOSE 514/tcp 514/udp
 CMD ["/usr/local/bin/supervisord"]
+
+RUN apt-get purge curl -y
+
+RUN mkdir /var/log/awslogs
+WORKDIR /var/log/awslogs
+
+CMD /bin/sh /var/awslogs/bin/awslogs-agent-launcher.sh

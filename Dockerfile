@@ -31,7 +31,7 @@ ENV APACHE_LOG_DIR /var/log/apache2
 
 EXPOSE 80
 
-CMD ["apachectl", "-D",  "FOREGROUND"]
+CMD ["/usr/sbin/apache2ctl", "-D",  "FOREGROUND"]
 
 
 #For Log Management

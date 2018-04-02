@@ -18,7 +18,7 @@ RUN [ "rm", "-rf", "/var/lib/apt/lists/*", "/tmp/*", "/var/tmp/*" ]
 #Install cpan modules
 RUN ["cpanm", "Proc::ProcessTable", "Data::Dumper" ]
 
-echo $(grep $(hostname) /etc/hosts | cut -f1) $HOST >> /etc/hosts
+RUN echo $(grep $(hostname) /etc/hosts | cut -f1) $HOST >> /etc/hosts
 # Install app just to test from frontend
 RUN rm -rf /var/www/*
 ADD src /var/www

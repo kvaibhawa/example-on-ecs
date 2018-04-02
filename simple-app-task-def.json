@@ -12,7 +12,7 @@
         {
             "environment": [],
             "name": "simple-app",
-            "image": "431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1m65fbu557cyq:9e5be0e5",
+            "image": "431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1n4frgh8ag3s2:latest",
             "cpu": 10,
             "memory": 500,
             "portMappings": [
@@ -36,7 +36,7 @@
         },
         {
             "name": "busybox",
-            "image": "431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1m65fbu557cyq:9e5be0e5",
+            "image": "431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1n4frgh8ag3s2:latest",
             "cpu": 10,
             "memory": 500,
             "volumesFrom": [
@@ -56,7 +56,7 @@
         {
       "environment": [],
       "name": "cloudwatchlogs",
-      "image": "431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1m65fbu557cyq:9e5be0e5",
+      "image": "431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1n4frgh8ag3s2:latest",
       "cpu": 50,
       "portMappings": [],
       "memory": 64,

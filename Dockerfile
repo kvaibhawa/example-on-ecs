@@ -1,4 +1,4 @@
-FROM 431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1m65fbu557cyq:9e5be0e5
+FROM 431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1n4frgh8ag3s2:latest
 
 # Install dependencies
 RUN apt-get update -y

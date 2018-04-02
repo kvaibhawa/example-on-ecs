@@ -29,7 +29,7 @@ RUN chown -R www-data:www-data /var/www
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
-RUN echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf
+RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf
 RUN a2enconf fqdn
 RUN service apache2 reload
 EXPOSE 80

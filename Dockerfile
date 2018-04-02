@@ -84,7 +84,7 @@ CMD ["/usr/local/bin/supervisord"]
 
 RUN apt-get purge curl -y
 
-RUN mkdir /var/log/awslogs
+RUN mkdir -p /var/log/awslogs
 WORKDIR /var/log/awslogs
 
 CMD /bin/sh /var/awslogs/bin/awslogs-agent-launcher.sh

@@ -1,4 +1,4 @@
-FROM ubuntu:12.04
+FROM 431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1n4frgh8ag3s2:f3d6ead5
 
 # Install dependencies
 RUN apt-get update -y

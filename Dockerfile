@@ -1,4 +1,4 @@
-FROM 431307104808.dkr.ecr.us-east-1.amazonaws.com/stack-repos-1n4frgh8ag3s2:latest
+FROM ubuntu:12.04
 
 # Install dependencies
 RUN apt-get update -y
@@ -18,6 +18,7 @@ RUN [ "rm", "-rf", "/var/lib/apt/lists/*", "/tmp/*", "/var/tmp/*" ]
 #Install cpan modules
 RUN ["cpanm", "Proc::ProcessTable", "Data::Dumper" ]
 
+echo $(grep $(hostname) /etc/hosts | cut -f1) $HOST >> /etc/hosts
 # Install app just to test from frontend
 RUN rm -rf /var/www/*
 ADD src /var/www
